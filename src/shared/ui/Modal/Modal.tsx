@@ -33,9 +33,9 @@ export const Modal = (props: ModalProps) => {
   useEffect(() => {
     if (isOpen) {
       window.addEventListener('keydown', onKeyDown);
-    } else {
-      return () => window.removeEventListener('keydown', onKeyDown);
     }
+    // todo return in else
+    return () => window.removeEventListener('keydown', onKeyDown);
   }, [isOpen, onKeyDown]);
 
   const mods: Record<string, boolean> = {

@@ -8,19 +8,19 @@ interface PageErrorProps {
 }
 
 export const PageError = ({ className }: PageErrorProps) => {
-    const { t } = useTranslation();
+  const { t } = useTranslation();
 
-    const reloadPage = () => {
-        // eslint-disable-next-line no-restricted-globals
-        location.reload();
-    };
+  const reloadPage = () => {
+    // eslint-disable-next-line no-restricted-globals
+    location.reload();
+  };
 
-    return (
-        <div className={classNames(cls.PageError, {}, [className])}>
-            <p>{t('Произошла непредвиденная ошибка')}</p>
-            <Button onClick={reloadPage}>
-                {t('Обновить страницy')}
-            </Button>
-        </div>
-    );
+  return (
+    <div className={classNames(cls.PageError, {}, [className])}>
+      <p>{t('Произошла непредвиденная ошибка')}</p>
+      <Button onClick={reloadPage}>
+        {t('Обновить страницy')}
+      </Button>
+    </div>
+  );
 };
