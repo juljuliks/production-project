@@ -1,96 +1,125 @@
-name: linting, testing, building
+name: Linting, testing and building
 on:
   push:
-    branches: [master]
+    branches:
+      - master
+    paths-ignore:
+      - ".github/**"
+      - ".vscode/**"
   pull_request:
-    branches: [master]
+    branches:
+      - master
+    paths-ignore:
+      - ".github/**"
+      - ".vscode/**"
 jobs:
-  typescript:
+  init-host:
+    name: 1. Load project & Linting
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [17.x]
     steps:
-      - name: Checkout commit
-        uses: actions/checkout@v2
-      - name: Starting Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+      - name: Get repository code
+        uses: actions/checkout@v3
+      - name: Starting Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node-version }}
-      - name: install modules
-        run: npm i
-        # run: npm ci
-      - name: Cache deps
+          node-version: 17.4.0
+      - name: Cache Start
+        id: cache-npm
         uses: actions/cache@v3
         with:
-          path: ~/.npm
-          key: node-modules-${{ hashFiles('**/package-lock.json') }}
-      - name: linting typescript
-        run: npm run lint:ts
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
 
-  scss:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [17.x]
-    steps:
-      - name: Cache deps
-        uses: actions/cache@v3
-        with:
-          path: ~/.npm
-          key: node-modules-${{ hashFiles('**/package-lock.json') }}
-      - uses: actions/checkout@v2
-      - name: Starting Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: install modules
-        run: npm i
-      - name: linting css
+      - name: Install node modules
+        run: npm ci
+
+      - name: Linting typescript
+        if: always()
+        run: npm run lint:ts
+      - name: CSS linter
+        if: always()
         run: npm run lint:scss
 
-  testing:
+  unit-test:
+    name: 2.2 Unit testing
+    needs: init-host
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [17.x]
     steps:
-      - name: Cache deps
-        uses: actions/cache@v3
+      - name: Get repository code
+        uses: actions/checkout@v3
+      - name: Starting Node.js
+        uses: actions/setup-node@v3
         with:
-          path: ~/.npm
-          key: node-modules-${{ hashFiles('**/package-lock.json') }}
-      - uses: actions/checkout@v2
-      - name: Starting Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+          node-version: 17.4.0
+      - name: Cache Restore
+        id: cache-npm
+        uses: actions/cache/restore@v3
         with:
-          node-version: ${{ matrix.node-version }}
-      - name: install modules
-        run: npm i
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+          fail-on-cache-miss: true
       - name: unit testing
         run: npm run test:unit
 
-  storybook:
+  screens:
+    name: 2.3 Screenshots testing project
+    needs: init-host
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [17.x]
     steps:
-      - name: Cache deps
-        uses: actions/cache@v3
+      - name: Get repository code
+        uses: actions/checkout@v3
+      - name: Starting Node.js
+        uses: actions/setup-node@v3
         with:
-          path: ~/.npm
-          key: node-modules-${{ hashFiles('**/package-lock.json') }}
-      - uses: actions/checkout@v2
-      - name: Starting Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+          node-version: 17.4.0
+      - name: Cache Restore
+        id: cache-npm
+        uses: actions/cache/restore@v3
         with:
-          node-version: ${{ matrix.node-version }}
-      - name: install modules
-        run: npm i
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+          fail-on-cache-miss: true
+      - name: build storybook
+        if: always()
+        run: npm run storybook:build
+      - name: Screenshot testing
+        if: always()
+        id: screenshots
+        run: npm run test:ui:ci
+      - name: Uploade fail screenshots
+        if: ${{ failure() && steps.screenshots.conclusion == 'failure'}}
+        uses: actions/upload-artifact@v3
+        with:
+          path: ".loki/difference"
+          name: loki-fail-difference
+          
+  build:
+    name: 3. Build production
+    needs:
+      - unit-test
+      - screens
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get repository code
+        uses: actions/checkout@v3
+      - name: Starting Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 17.4.0
+      - name: Cache Restore
+        id: cache-npm
+        uses: actions/cache/restore@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+          fail-on-cache-miss: true
       - name: build production project
         run: npm run build:prod
-      - name: build storybook
-        run: npm run storybook:build
-      - name: screenshot testing
-        run: npm run test:ui:ci
