@@ -9,15 +9,15 @@ export interface ComponentRenderOptions {
 }
 
 export function componentRender(component: ReactNode, options: ComponentRenderOptions = {}) {
-    const {
-        route = '/',
-    } = options;
-    return render(
-        <MemoryRouter initialEntries={[route]}>
-            <I18nextProvider i18n={i18nForTests}>
-                {component}
-            </I18nextProvider>
-        </MemoryRouter>,
+  const {
+    route = '/',
+  } = options;
+  return render(
+    <MemoryRouter initialEntries={[route]}>
+      <I18nextProvider i18n={i18nForTests}>
+        {component}
+      </I18nextProvider>
+    </MemoryRouter>,
 
-    );
+  );
 }
