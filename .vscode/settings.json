@@ -1,9 +1,9 @@
 {
-    "i18n-ally.localesPaths": [
-        "public/locales",
-        "src/shared/config/i18n"
-    ],
-    "i18n-ally.keystyle": "nested",
-    "i18next.i18nPaths": "/Users/jglukhova/study/advansed-frontend/public/locales,/Users/jglukhova/study/advansed-frontend/src/shared/config/i18n",
-    "eslint.codeActionsOnSave.rules": null
+  "i18n-ally.localesPaths": [
+    "public/locales",
+    "src/shared/config/i18n"
+  ],
+  "i18n-ally.keystyle": "nested",
+  "i18next.i18nPaths": "/Users/jglukhova/study/advansed-frontend/public/locales,/Users/jglukhova/study/advansed-frontend/src/shared/config/i18n",
+  "eslint.codeActionsOnSave.rules": null
 }
