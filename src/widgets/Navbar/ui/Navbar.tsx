@@ -1,9 +1,9 @@
 /* eslint-disable i18next/no-literal-string */
+import { LoginModal } from 'features/AuthByUsername';
 import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { Button, ButtonTheme } from 'shared/ui/Button/Button';
-import { Modal } from 'shared/ui/Modal/Modal';
 import cls from './Navbar.module.scss';
 
 interface NavBarProps {
@@ -14,8 +14,12 @@ export const Navbar = ({ className }: NavBarProps) => {
   const { t } = useTranslation();
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
-  const onToggleModal = useCallback(() => {
-    setIsAuthModalOpen((prev) => !prev);
+  const onShowModal = useCallback(() => {
+    setIsAuthModalOpen(true);
+  }, []);
+
+  const onCloseModal = useCallback(() => {
+    setIsAuthModalOpen(false);
   }, []);
 
   return (
@@ -23,18 +27,11 @@ export const Navbar = ({ className }: NavBarProps) => {
       <Button
         theme={ButtonTheme.CLEAR_INVERTED}
         className={classNames(cls.links)}
-        onClick={onToggleModal}
+        onClick={onShowModal}
       >
         {t('Войти')}
       </Button>
-      <Modal isOpen={isAuthModalOpen} onClose={onToggleModal}>
-        <div>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-          Labore sapiente impedit tenetur quo illum veritatis debitis,
-          harum ex quis error officiis hic dolor inventore, sunt porro iste corrupti,
-          vitae tempore!
-        </div>
-      </Modal>
+      <LoginModal isOpen={isAuthModalOpen} onClose={onCloseModal} />
     </div>
   );
 };
