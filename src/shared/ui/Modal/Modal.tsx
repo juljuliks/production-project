@@ -1,4 +1,6 @@
-import React, { ReactNode, useCallback, useEffect } from 'react';
+import React, {
+  ReactNode, useCallback, useEffect, useState,
+} from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { Portal } from 'shared/ui/Portal/Portal';
 import cls from './Modal.module.scss';
@@ -7,7 +9,8 @@ interface ModalProps {
   className?: string,
   children: ReactNode,
   isOpen?: boolean,
-  onClose?: () => void
+  onClose?: () => void,
+  lazy?: boolean
 }
 
 export const Modal = (props: ModalProps) => {
@@ -16,7 +19,10 @@ export const Modal = (props: ModalProps) => {
     children,
     isOpen,
     onClose,
+    lazy,
   } = props;
+
+  const [isMounted, setMounted] = useState(false);
 
   const closeHandler = useCallback(() => {
     if (onClose) {
@@ -29,6 +35,12 @@ export const Modal = (props: ModalProps) => {
       closeHandler();
     }
   }, [closeHandler]);
+
+  useEffect(() => {
+    if (isOpen) {
+      setMounted(true);
+    }
+  }, [isOpen]);
 
   useEffect(() => {
     if (isOpen) {
@@ -45,6 +57,10 @@ export const Modal = (props: ModalProps) => {
   const onContentClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.stopPropagation();
   };
+
+  if (lazy && !isMounted) {
+    return null;
+  }
 
   return (
     <Portal>
