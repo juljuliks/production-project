@@ -5,16 +5,21 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import { Button, ButtonTheme } from 'shared/ui/Button/Button';
 import { Input } from 'shared/ui/Input/Input';
 import { Text, TextTheme } from 'shared/ui/Text/Text';
+import { ReducersList, useDynamicModuleLoad } from 'shared/hooks/useDynamicModuleLoad';
 import { loginByUsername } from '../../model/services/loginByUsername/loginByUsername';
 import { getLoginState } from '../../model/selectors/getLoginState/getLoginsState';
-import { loginActions } from '../../model/slice/loginSlice';
+import { loginActions, loginReducer } from '../../model/slice/loginSlice';
 import cls from './LoginForm.module.scss';
 
-interface LoginFormProps {
+export interface LoginFormProps {
   className?: string,
 }
 
-export const LoginForm = memo((props: LoginFormProps) => {
+const initialReducers: ReducersList = {
+  loginForm: loginReducer,
+};
+
+const LoginForm = memo((props: LoginFormProps) => {
   const {
     className,
   } = props;
@@ -26,6 +31,11 @@ export const LoginForm = memo((props: LoginFormProps) => {
     error,
     isLoading,
   } = useSelector(getLoginState);
+
+  useDynamicModuleLoad({
+    reducers: initialReducers,
+    removeAfterUnmount: true,
+  });
 
   const onChangeUsername = useCallback((value: string) => {
     dispatch(loginActions.setUsername(value));
@@ -69,3 +79,5 @@ export const LoginForm = memo((props: LoginFormProps) => {
     </div>
   );
 });
+
+export default LoginForm;

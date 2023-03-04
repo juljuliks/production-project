@@ -1,7 +1,6 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-npm run build:prod
 npx tsc --noEmit
 npm run lint:ts
 npm run lint:scss
