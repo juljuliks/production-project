@@ -13,7 +13,11 @@
       "postId": 1
     }
   ],
-  "profile": {
-    "name": "typicode"
-  }
+  "users": [
+    {
+      "id": 1,
+      "username": "asd",
+      "password": "asd"
+    }
+  ]
 }
