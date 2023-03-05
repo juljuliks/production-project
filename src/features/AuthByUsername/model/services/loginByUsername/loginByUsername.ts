@@ -8,6 +8,7 @@ interface LoginByUsernameProps {
   password: string
 }
 
+// первый вызов dispatch status -> pending
 export const loginByUsername = createAsyncThunk<User, LoginByUsernameProps, { rejectValue: string }>(
   'users/loginByUsername',
   async (authData, thunkAPI) => {
@@ -17,10 +18,12 @@ export const loginByUsername = createAsyncThunk<User, LoginByUsernameProps, { re
         throw new Error();
       }
       localStorage.setItem(USER_LOCAL_STORAGE_KEY, JSON.stringify(response.data));
+
+      // второй вызов dispatch
       thunkAPI.dispatch(userActions.setAuthData(response.data));
+      // третий вызов dispatch status -> fulfilled
       return response.data;
     } catch (e) {
-      console.log(e);
       return thunkAPI.rejectWithValue('error');
     }
   },
