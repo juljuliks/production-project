@@ -10,7 +10,6 @@ const MainPage: FC = () => {
     <div>
       <BugButton />
       {t('Главная страница')}
-
     </div>
   );
 };

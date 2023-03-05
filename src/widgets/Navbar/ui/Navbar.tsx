@@ -1,7 +1,7 @@
 /* eslint-disable i18next/no-literal-string */
 import { getUserAuthData, userActions } from 'entities/User';
 import { LoginModal } from 'features/AuthByUsername';
-import React, { useCallback, useState } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { classNames } from 'shared/lib/classNames/classNames';
@@ -12,7 +12,7 @@ interface NavBarProps {
   className?: string,
 }
 
-export const Navbar = ({ className }: NavBarProps) => {
+export const Navbar = memo(({ className }: NavBarProps) => {
   const { t } = useTranslation();
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const authData = useSelector(getUserAuthData);
@@ -56,4 +56,4 @@ export const Navbar = ({ className }: NavBarProps) => {
       {isAuthModalOpen && <LoginModal isOpen={isAuthModalOpen} onClose={onCloseModal} />}
     </div>
   );
-};
+});

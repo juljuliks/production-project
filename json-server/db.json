@@ -3,7 +3,12 @@
     {
       "id": "1",
       "title": "json-server",
-      "author": "typicode"
+      "userId": "1"
+    },
+    {
+      "id": "2",
+      "title": "json-server",
+      "userId": "2"
     }
   ],
   "comments": [
@@ -16,8 +21,18 @@
   "users": [
     {
       "id": "1",
-      "username": "asd",
-      "password": "asd"
+      "username": "admin",
+      "password": "123"
     }
-  ]
+  ],
+  "profile": {
+    "first": "Тимур",
+    "lastname": "Ульби",
+    "age": 22,
+    "currency": "RUB",
+    "country": "Russia",
+    "city": "Moscow",
+    "username": "admin",
+    "avatar": "https://pic.rutubelist.ru/user/3b/27/3b2758ad5492a76b578f7ee072e4e894.jpg"
+  }
 }
