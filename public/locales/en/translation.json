@@ -1,7 +1,20 @@
 {
-    "Перевод": "Translate",
-    "Главная страница": "Main page",
-    "Язык": "English",
-    "Страница не найденa": "Page not found",
-    "Короткий язык": "En"
+  "decrement": "decrement",
+  "increment": "increment",
+  "Введите username": "Input username",
+  "Введите пароль": "Input пароль",
+  "Войти": "Login",
+  "Вы ввели неверный логин или пароль": "Wrong username or password",
+  "Выйти": "Logout",
+  "Главная": "Main",
+  "Главная страница": "Main page",
+  "Главная страница1": "Главная страница1",
+  "Короткий язык": "EN",
+  "Новое": "Новое",
+  "О сайте": "About us",
+  "Обновить страницy": "Reload page",
+  "Произошла непредвиденная ошибка": "Something went wrong",
+  "Страница не найденa": "Page not found",
+  "Форма авторизации": "Authorization form",
+  "Язык": "English"
 }

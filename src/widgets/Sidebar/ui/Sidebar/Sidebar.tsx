@@ -11,7 +11,7 @@ import AboutIcon from 'shared/assets/icons/about-page-icon.svg';
 import cls from './Sidebar.module.scss';
 
 interface SidebarProps {
-    className?: string,
+  className?: string,
 }
 
 export const Sidebar = ({ className }: SidebarProps) => {
@@ -43,7 +43,7 @@ export const Sidebar = ({ className }: SidebarProps) => {
         >
           <MainIcon className={cls.icon} />
           <span className={cls.link}>
-            {t('Главная')}
+            {t('Главная страница')}
           </span>
         </AppLink>
         <AppLink

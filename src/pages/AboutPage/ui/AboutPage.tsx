@@ -5,7 +5,7 @@ const AboutPage: FC = () => {
   const { t } = useTranslation('about');
   return (
     <div>
-      {t('О сайте')}
+      {t('О сайте', { ns: 'about' })}
     </div>
   );
 };
