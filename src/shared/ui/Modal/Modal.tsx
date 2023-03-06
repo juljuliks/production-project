@@ -1,7 +1,7 @@
 import React, {
   ReactNode, useCallback, useEffect, useState,
 } from 'react';
-import { classNames } from 'shared/lib/classNames/classNames';
+import { classNames, Mods } from 'shared/lib/classNames/classNames';
 import { Portal } from 'shared/ui/Portal/Portal';
 import cls from './Modal.module.scss';
 
@@ -50,7 +50,7 @@ export const Modal = (props: ModalProps) => {
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [isOpen, onKeyDown]);
 
-  const mods: Record<string, boolean> = {
+  const mods: Mods = {
     [cls.opened]: isOpen,
   };
 
