@@ -1,11 +1,11 @@
 import { FC } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useNsTranslation } from 'shared/lib/hooks/useNsTranslation';
 
 const AboutPage: FC = () => {
-  const { t } = useTranslation('about');
+  const { t } = useNsTranslation('about');
   return (
     <div>
-      {t('О сайте', { ns: 'about' })}
+      {t('О сайте')}
     </div>
   );
 };

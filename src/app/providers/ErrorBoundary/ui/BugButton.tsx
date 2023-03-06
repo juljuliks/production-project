@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useNsTranslation } from 'shared/lib/hooks/useNsTranslation';
 import { Button } from 'shared/ui/Button/Button';
 
 // Компонент для тестирования
 export const BugButton = () => {
   const [error, setError] = useState(false);
-  const { t } = useTranslation('main');
+  const { t } = useNsTranslation('main');
   useEffect(() => {
     if (error) {
       throw new Error();
@@ -16,7 +16,7 @@ export const BugButton = () => {
 
   return (
     <Button onClick={onThrow}>
-      {t('Выбросить ошибку', { ns: 'main' })}
+      {t('Выбросить ошибку')}
     </Button>
   );
 };
