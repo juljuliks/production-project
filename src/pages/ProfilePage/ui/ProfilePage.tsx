@@ -6,16 +6,19 @@ import {
   getProfileForm,
   getProfileIsLoading,
   getProfileReadonly,
+  getProfileValidateErrors,
   profileActions,
   ProfileCard,
   profileReducer,
 } from 'features/EditableProfileCard';
-import { useCallback, useEffect } from 'react';
+import { ValidateProfileError } from 'features/EditableProfileCard/model/types/profile';
+import { useCallback, useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { ReducersList, useDynamicModuleLoad } from 'shared/lib/hooks/useDynamicModuleLoad';
 import { useNsTranslation } from 'shared/lib/hooks/useNsTranslation';
+import { Text, TextTheme } from 'shared/ui/Text/Text';
 import cls from './ProfilePage.module.scss';
 import { ProfilePageHeader } from './ProfilePageHeader/ProfilePageHeader';
 
@@ -36,9 +39,20 @@ const ProfilePage = (props: ProfilePageProps) => {
   const isLoading = useSelector(getProfileIsLoading);
   const error = useSelector(getProfileError);
   const readonly = useSelector(getProfileReadonly);
+  const validateErrors = useSelector(getProfileValidateErrors);
+
+  const validateErrorTranslates = useMemo(() => ({
+    [ValidateProfileError.SERVER_ERROR]: t('Серверная ошибка при сохранении'),
+    [ValidateProfileError.INCORRECT_USER_DATA]: t('Имя и фамилия обязательны'),
+    [ValidateProfileError.INCORRECT_COUNTRY]: t('Некорректный регион'),
+    [ValidateProfileError.INCORRECT_AGE]: t('Некорректный возраст'),
+    [ValidateProfileError.NO_DATA]: t('Даннные не указаны'),
+  }), [t]);
 
   useEffect(() => {
-    dispatch(fetchProfileData());
+    if (__PROJECT__ !== 'storybook') {
+      dispatch(fetchProfileData());
+    }
   }, [dispatch]);
 
   const onChangeFirstname = useCallback((value?: string) => {
@@ -54,7 +68,7 @@ const ProfilePage = (props: ProfilePageProps) => {
   }, [dispatch]);
 
   const onChangeAge = useCallback((value?: string) => {
-    if (value && Number.isInteger(+value)) {
+    if (Number.isInteger(Number(value))) {
       dispatch(profileActions.updateProfile({ age: Number(value || 0) }));
     }
   }, [dispatch]);
@@ -78,6 +92,9 @@ const ProfilePage = (props: ProfilePageProps) => {
   return (
     <div className={classNames(cls.ProfilePage, {}, [className])}>
       <ProfilePageHeader />
+      {validateErrors?.length && validateErrors.map((error) => (
+        <Text key={error} theme={TextTheme.ERROR} text={validateErrorTranslates[error]} />
+      ))}
       <ProfileCard
         data={formData}
         isLoading={isLoading}
