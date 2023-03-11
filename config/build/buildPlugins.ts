@@ -30,7 +30,6 @@ export function buildPlugins({ paths, isDev, project }: BuildOptions): webpack.W
       __PROJECT__: JSON.stringify(project),
       ...envKeys,
     }),
-    new ReactRefreshWebpackPlugin({ overlay: false }),
   ];
 
   if (isDev) {
@@ -38,6 +37,7 @@ export function buildPlugins({ paths, isDev, project }: BuildOptions): webpack.W
     plugins.push(new BundleAnalyzerPlugin({
       openAnalyzer: false,
     }));
+    plugins.push(new ReactRefreshWebpackPlugin({ overlay: false }));
   }
 
   return plugins;
