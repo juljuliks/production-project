@@ -6,14 +6,11 @@
 import path from 'path';
 
 export default {
-  // All imported modules in your tests should be mocked automatically
-  // automock: false,
-
-  // Stop running tests after `n` failures
-  // bail: 0,
-
-  // The directory where Jest should store its cached dependency information
-  // cacheDirectory: "/private/var/folders/0h/_915jsw919sck64jxd5fnzcc0000gp/T/jest_dy",
+  // A set of global variables that need to be available in all test environments
+  globals: {
+    __IS_DEV__: true,
+    __PROJECT__: 'jest',
+  },
 
   // Automatically clear mock calls, instances and results before every test
   clearMocks: true,
@@ -59,10 +56,14 @@ export default {
     '\\.svg': path.resolve(__dirname, 'jestEmptyComponent.tsx'),
   },
 
-  // A set of global variables that need to be available in all test environments
-  globals: {
-    __IS_DEV__: true,
-  },
+  // All imported modules in your tests should be mocked automatically
+  // automock: false,
+
+  // Stop running tests after `n` failures
+  // bail: 0,
+
+  // The directory where Jest should store its cached dependency information
+  // cacheDirectory: "/private/var/folders/0h/_915jsw919sck64jxd5fnzcc0000gp/T/jest_dy",
 
   // Indicates whether the coverage information should be collected while executing the test
   // collectCoverage: false,
