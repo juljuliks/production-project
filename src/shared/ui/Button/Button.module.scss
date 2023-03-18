@@ -2,6 +2,11 @@
     cursor: pointer;
     color: var(--primary-color);
     padding: 6px 15px;
+    transition: transform 250ms ease-in-out;
+
+    &:hover {
+        transform: scale(1.1);
+    }
 }
 
 .disabled {

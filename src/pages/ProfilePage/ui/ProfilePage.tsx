@@ -17,6 +17,7 @@ import { useSelector } from 'react-redux';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { ReducersList, useDynamicModuleLoad } from 'shared/lib/hooks/useDynamicModuleLoad';
+import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect';
 import { useNsTranslation } from 'shared/lib/hooks/useNsTranslation';
 import { Text, TextTheme } from 'shared/ui/Text/Text';
 import cls from './ProfilePage.module.scss';
@@ -49,11 +50,9 @@ const ProfilePage = (props: ProfilePageProps) => {
     [ValidateProfileError.NO_DATA]: t('Даннные не указаны'),
   }), [t]);
 
-  useEffect(() => {
-    if (__PROJECT__ !== 'storybook') {
-      dispatch(fetchProfileData());
-    }
-  }, [dispatch]);
+  useInitialEffect(() => {
+    dispatch(fetchProfileData());
+  });
 
   const onChangeFirstname = useCallback((value?: string) => {
     dispatch(profileActions.updateProfile({ first: value || '' }));
