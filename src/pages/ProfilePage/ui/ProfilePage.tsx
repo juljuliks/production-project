@@ -12,8 +12,9 @@ import {
   profileReducer,
 } from 'features/EditableProfileCard';
 import { ValidateProfileError } from 'features/EditableProfileCard/model/types/profile';
-import { useCallback, useEffect, useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { ReducersList, useDynamicModuleLoad } from 'shared/lib/hooks/useDynamicModuleLoad';
@@ -33,8 +34,9 @@ const reducers: ReducersList = {
 
 const ProfilePage = (props: ProfilePageProps) => {
   const { className } = props;
+  const { id } = useParams<{ id: string }>();
   const { t } = useNsTranslation('profile');
-  useDynamicModuleLoad({ reducers, removeAfterUnmount: true });
+  useDynamicModuleLoad({ reducers });
   const dispatch = useAppDispatch();
   const formData = useSelector(getProfileForm);
   const isLoading = useSelector(getProfileIsLoading);
@@ -51,7 +53,9 @@ const ProfilePage = (props: ProfilePageProps) => {
   }), [t]);
 
   useInitialEffect(() => {
-    dispatch(fetchProfileData());
+    if (id) {
+      dispatch(fetchProfileData(id));
+    }
   });
 
   const onChangeFirstname = useCallback((value?: string) => {
@@ -87,6 +91,14 @@ const ProfilePage = (props: ProfilePageProps) => {
   const onChangeCountry = useCallback((country: Country) => {
     dispatch(profileActions.updateProfile({ country }));
   }, [dispatch]);
+
+  if (!id) {
+    return (
+      <div className={classNames(cls.ProfilePage, {}, [className])}>
+        {t('Профиль не найден')}
+      </div>
+    );
+  }
 
   return (
     <div className={classNames(cls.ProfilePage, {}, [className])}>

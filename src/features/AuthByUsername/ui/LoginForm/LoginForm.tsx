@@ -35,10 +35,7 @@ const LoginForm = memo((props: LoginFormProps) => {
     isLoading,
   } = useSelector(getLoginState);
 
-  useDynamicModuleLoad({
-    reducers: initialReducers,
-    removeAfterUnmount: true,
-  });
+  useDynamicModuleLoad({ reducers: initialReducers });
 
   const onChangeUsername = useCallback((value: string) => {
     dispatch(loginActions.setUsername(value));

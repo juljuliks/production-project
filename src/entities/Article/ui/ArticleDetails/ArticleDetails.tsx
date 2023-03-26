@@ -72,7 +72,7 @@ export const ArticleDetails = memo((props: ArticleDetailsProps) => {
   const isLoading = useSelector(getArticleDetailsIsLoading);
   const article = useSelector(getArticleDetailsData);
   const error = useSelector(getArticleDetailsError);
-  useDynamicModuleLoad({ reducers, removeAfterUnmount: true });
+  useDynamicModuleLoad({ reducers });
 
   useInitialEffect(() => {
     dispatch(fetchArticleById(id));
