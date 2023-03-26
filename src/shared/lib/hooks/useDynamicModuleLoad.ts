@@ -12,7 +12,7 @@ interface UseDynamicModuleLoadArgs {
   removeAfterUnmount?: boolean
 }
 
-export const useDynamicModuleLoad = ({ reducers, removeAfterUnmount }: UseDynamicModuleLoadArgs) => {
+export const useDynamicModuleLoad = ({ reducers, removeAfterUnmount = true }: UseDynamicModuleLoadArgs) => {
   const dispatch = useDispatch();
   const store = useStore() as ReduxStoreWithManager;
 
