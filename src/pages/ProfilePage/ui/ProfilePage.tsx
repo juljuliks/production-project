@@ -20,6 +20,7 @@ import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { ReducersList, useDynamicModuleLoad } from 'shared/lib/hooks/useDynamicModuleLoad';
 import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect';
 import { useNsTranslation } from 'shared/lib/hooks/useNsTranslation';
+import { Page } from 'shared/ui/Page/Page';
 import { Text, TextTheme } from 'shared/ui/Text/Text';
 import cls from './ProfilePage.module.scss';
 import { ProfilePageHeader } from './ProfilePageHeader/ProfilePageHeader';
@@ -101,7 +102,7 @@ const ProfilePage = (props: ProfilePageProps) => {
   }
 
   return (
-    <div className={classNames(cls.ProfilePage, {}, [className])}>
+    <Page className={classNames(cls.ProfilePage, {}, [className])}>
       <ProfilePageHeader />
       {validateErrors?.length && validateErrors.map((error) => (
         <Text key={error} theme={TextTheme.ERROR} text={validateErrorTranslates[error]} />
@@ -120,7 +121,7 @@ const ProfilePage = (props: ProfilePageProps) => {
         onChangeCurrency={onChangeCurrency}
         onChangeCountry={onChangeCountry}
       />
-    </div>
+    </Page>
   );
 };
 

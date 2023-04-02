@@ -1,9 +1,4 @@
 /* eslint-disable i18next/no-literal-string */
-import {
-  getArticleDetailsData,
-  getArticleDetailsError,
-  getArticleDetailsIsLoading,
-} from 'entities/Article/model/selectors/articleDetails';
 import { fetchArticleById } from 'entities/Article/model/services/fetchArticleById';
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -19,6 +14,11 @@ import EyeIcon from 'shared/assets/icons/eye.svg';
 import CalendarIcon from 'shared/assets/icons/calendar.svg';
 import { ArticleBlock, ArticleBlockType } from 'entities/Article/model/types/article';
 import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect';
+import {
+  getArticleDetailsData,
+  getArticleDetailsError,
+  getArticleDetailsIsLoading,
+} from '../../model/selectors/articleDetails';
 import { articleDetailsReducer } from '../../model/slice/articleDetailsSlice';
 import cls from './ArticleDetails.module.scss';
 import { ArticleCodeBlockComponent } from '../ArticleCodeBlockComponent/ArticleCodeBlockComponent';

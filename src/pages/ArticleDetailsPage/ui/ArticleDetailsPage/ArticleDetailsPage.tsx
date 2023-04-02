@@ -15,6 +15,7 @@ import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { AddCommentForm } from 'features/AddCommentForm';
 import { Button, ButtonTheme } from 'shared/ui/Button/Button';
+import { Page } from 'shared/ui/Page/Page';
 import { fetchCommentsByArticleId } from '../../model/services/fetchCommentsByArticleId';
 import { addCommentForArticle } from '../../model/services/addCommentForArticle/addCommentForArticle';
 import cls from './ArticleDetailsPage.module.scss';
@@ -59,7 +60,7 @@ const ArticleDetailsPage: FC<ArticleDetailsPageProps> = (props) => {
   }
 
   return (
-    <div className={classNames(cls.articleDetailsPage, {}, [className])}>
+    <Page className={classNames(cls.articleDetailsPage, {}, [className])}>
       <Button theme={ButtonTheme.OUTLINE} onClick={onBackToList}>
         {t('Назад к списку')}
       </Button>
@@ -67,7 +68,7 @@ const ArticleDetailsPage: FC<ArticleDetailsPageProps> = (props) => {
       <Text className={cls.commentsTitle} title={t('Комментарии')} />
       <AddCommentForm onSendComment={onSendComment} />
       <CommentList comments={comments} isLoading={commentsIsLoading} />
-    </div>
+    </Page>
   );
 };
 
