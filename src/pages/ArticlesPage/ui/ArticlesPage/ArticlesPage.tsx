@@ -1,5 +1,5 @@
 /* eslint-disable i18next/no-literal-string */
-import { Article, ArticleView } from 'entities/Article/model/types/article';
+import { ArticleView } from 'entities/Article/model/types/article';
 import { ArticleList } from 'entities/Article/ui/ArticleList/ArticleList';
 import { fetchArticlesList } from 'pages/ArticlesPage/model/services/fetchArticlesList/fetchArticlesList';
 import { FC, memo, useCallback } from 'react';
@@ -10,6 +10,8 @@ import { ReducersList, useDynamicModuleLoad } from 'shared/lib/hooks/useDynamicM
 import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect';
 import { useNsTranslation } from 'shared/lib/hooks/useNsTranslation';
 import { ArticleViewSelector } from 'entities/Article/ui/ArticleViewSelector/ArticleViewSelector';
+import { Page } from 'shared/ui/Page/Page';
+import { fetchNextArticlesPage } from 'pages/ArticlesPage/model/services/fetchNextArticlesPage/fetchNextArticlesPage';
 import { articlesPageActions, articlesPageReducer, getArticles } from '../../model/slices/articlesPageSlice';
 import {
   getArticlesPageIsLoading,
@@ -37,23 +39,30 @@ const ArticlesPage: FC<ArticlesPageProps> = (props) => {
   useDynamicModuleLoad({ reducers });
 
   useInitialEffect(() => {
-    dispatch(fetchArticlesList());
     dispatch(articlesPageActions.initState());
+    dispatch(fetchArticlesList({ page: 1 }));
   });
+
+  const onLoadNextPart = useCallback(() => {
+    dispatch(fetchNextArticlesPage());
+  }, [dispatch]);
 
   const onChangeView = useCallback((view: ArticleView) => {
     dispatch(articlesPageActions.setView(view));
   }, [dispatch]);
 
   return (
-    <div className={classNames(cls.ArticlesPage, {}, [className])}>
+    <Page
+      className={classNames(cls.ArticlesPage, {}, [className])}
+      onScrollEnd={onLoadNextPart}
+    >
       <ArticleViewSelector view={view} onViewClick={onChangeView} />
       <ArticleList
         isLoading={isLoading}
         view={view}
         articles={articles}
       />
-    </div>
+    </Page>
   );
 };
 
