@@ -20,7 +20,7 @@ import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { ReducersList, useDynamicModuleLoad } from 'shared/lib/hooks/useDynamicModuleLoad';
 import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect';
 import { useNsTranslation } from 'shared/lib/hooks/useNsTranslation';
-import { Page } from 'shared/ui/Page/Page';
+import { Page } from 'widgets/Page';
 import { Text, TextTheme } from 'shared/ui/Text/Text';
 import cls from './ProfilePage.module.scss';
 import { ProfilePageHeader } from './ProfilePageHeader/ProfilePageHeader';
