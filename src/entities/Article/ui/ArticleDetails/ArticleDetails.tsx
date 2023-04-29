@@ -1,5 +1,4 @@
 /* eslint-disable i18next/no-literal-string */
-import { fetchArticleById } from 'entities/Article/model/services/fetchArticleById';
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -12,8 +11,10 @@ import { Skeleton } from 'shared/ui/Skeleton/Skeleton';
 import { Text, TextAlign, TextSize } from 'shared/ui/Text/Text';
 import EyeIcon from 'shared/assets/icons/eye.svg';
 import CalendarIcon from 'shared/assets/icons/calendar.svg';
-import { ArticleBlock, ArticleBlockType } from 'entities/Article/model/types/article';
 import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect';
+import { fetchArticleById } from '../../model/services/fetchArticleById';
+import { ArticleCodeBlockComponent } from '../ArticleCodeBlockComponent/ArticleCodeBlockComponent';
+import { ArticleBlock, ArticleBlockType } from '../../model/types/article';
 import {
   getArticleDetailsData,
   getArticleDetailsError,
@@ -21,7 +22,6 @@ import {
 } from '../../model/selectors/articleDetails';
 import { articleDetailsReducer } from '../../model/slice/articleDetailsSlice';
 import cls from './ArticleDetails.module.scss';
-import { ArticleCodeBlockComponent } from '../ArticleCodeBlockComponent/ArticleCodeBlockComponent';
 import { ArticleImageBlockComponent } from '../ArticleImageBlockComponent/ArticleImageBlockComponent';
 import { ArticleTextBlockComponent } from '../ArticleTextBlockComponent/ArticleTextBlockComponent';
 

@@ -1,8 +1,5 @@
 import { ArticleDetails } from 'entities/Article';
 import { CommentList } from 'entities/Comment';
-import {
-  getArticleComments,
-} from 'pages/ArticleDetailsPage/model/slice/articleDetailCommentSlice';
 import { FC, memo, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -15,6 +12,9 @@ import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { AddCommentForm } from 'features/AddCommentForm';
 import { Page } from 'widgets/Page';
 import { ArticleList } from 'entities/Article/ui/ArticleList/ArticleList';
+import {
+  getArticleComments,
+} from '../../model/slice/articleDetailCommentSlice';
 import { articleDetailsPageReducer } from '../../model/slice';
 import { fetchArticleRecommendations } from '../../model/services/fetchArticleRecommendations';
 import { getArticleRecomendationsIsLoading } from '../../model/selectors/recomendations';
