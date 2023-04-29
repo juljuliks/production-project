@@ -9,6 +9,9 @@ import { Button, ButtonTheme } from 'shared/ui/Button/Button';
 import { AppLink, AppLinkTheme } from 'shared/ui/AppLink/AppLink';
 import { RoutePath } from 'shared/config/routeConfig/routeConfig';
 import { Text, TextTheme } from 'shared/ui/Text/Text';
+import { Dropdown } from 'shared/ui/Dropdown/Dropdown';
+import { Avatar } from 'shared/ui/Avatar/Avatar';
+import { useNavigate } from 'react-router-dom';
 import cls from './Navbar.module.scss';
 
 interface NavBarProps {
@@ -20,6 +23,7 @@ export const Navbar = memo(({ className }: NavBarProps) => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const authData = useSelector(getUserAuthData);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onShowModal = useCallback(() => {
     setIsAuthModalOpen(true);
@@ -35,7 +39,7 @@ export const Navbar = memo(({ className }: NavBarProps) => {
 
   if (authData) {
     return (
-      <div className={classNames(cls.Navbar, {}, [className])}>
+      <header className={classNames(cls.Navbar, {}, [className])}>
         <Text
           title="Ulbi tv app"
           theme={TextTheme.INVERTED}
@@ -48,14 +52,22 @@ export const Navbar = memo(({ className }: NavBarProps) => {
         >
           {t('Создание статьи')}
         </AppLink>
-        <Button
-          theme={ButtonTheme.CLEAR_INVERTED}
-          className={classNames(cls.links)}
-          onClick={onLogout}
-        >
-          {t('Выйти')}
-        </Button>
-      </div>
+        <Dropdown
+          direction="bottom left"
+          className={cls.dropdown}
+          items={[
+            {
+              content: t('Профиль'),
+              onClick: () => navigate(`${RoutePath.profile}/${authData.id}`),
+            },
+            {
+              content: t('Выйти'),
+              onClick: onLogout,
+            },
+          ]}
+          trigger={<Avatar size={30} src={authData.avatar} />}
+        />
+      </header>
     );
   }
 
