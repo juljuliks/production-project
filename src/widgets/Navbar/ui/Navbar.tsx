@@ -6,6 +6,9 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { Button, ButtonTheme } from 'shared/ui/Button/Button';
+import { AppLink, AppLinkTheme } from 'shared/ui/AppLink/AppLink';
+import { RoutePath } from 'shared/config/routeConfig/routeConfig';
+import { Text, TextTheme } from 'shared/ui/Text/Text';
 import cls from './Navbar.module.scss';
 
 interface NavBarProps {
@@ -33,6 +36,18 @@ export const Navbar = memo(({ className }: NavBarProps) => {
   if (authData) {
     return (
       <div className={classNames(cls.Navbar, {}, [className])}>
+        <Text
+          title="Ulbi tv app"
+          theme={TextTheme.INVERTED}
+          className={cls.appName}
+        />
+        <AppLink
+          to={RoutePath.article_create}
+          theme={AppLinkTheme.SECONDARY}
+          className={cls.createBtn}
+        >
+          {t('Создание статьи')}
+        </AppLink>
         <Button
           theme={ButtonTheme.CLEAR_INVERTED}
           className={classNames(cls.links)}

@@ -1,5 +1,4 @@
 /* eslint-disable i18next/no-literal-string */
-import { ArticleView } from 'entities/Article/model/types/article';
 import { ArticleList } from 'entities/Article/ui/ArticleList/ArticleList';
 import { FC, memo, useCallback } from 'react';
 import { useSelector } from 'react-redux';
@@ -8,12 +7,11 @@ import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { ReducersList, useDynamicModuleLoad } from 'shared/lib/hooks/useDynamicModuleLoad';
 import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect';
 import { useNsTranslation } from 'shared/lib/hooks/useNsTranslation';
-import { ArticleViewSelector } from 'entities/Article/ui/ArticleViewSelector/ArticleViewSelector';
 import { Page } from 'widgets/Page';
-import { fetchNextArticlesPage } from 'pages/ArticlesPage/model/services/fetchNextArticlesPage/fetchNextArticlesPage';
-import { initArticlesPage } from 'pages/ArticlesPage/model/services/fetchNextArticlesPage/initArticlesPage';
 import { useSearchParams } from 'react-router-dom';
-import { articlesPageActions, articlesPageReducer, getArticles } from '../../model/slices/articlesPageSlice';
+import { fetchNextArticlesPage } from '../../model/services/fetchNextArticlesPage/fetchNextArticlesPage';
+import { initArticlesPage } from '../../model/services/fetchNextArticlesPage/initArticlesPage';
+import { articlesPageReducer, getArticles } from '../../model/slices/articlesPageSlice';
 import {
   getArticlesPageIsLoading,
   getArticlesPageError,
