@@ -22,6 +22,7 @@ import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect';
 import { useNsTranslation } from 'shared/lib/hooks/useNsTranslation';
 import { Page } from 'widgets/Page';
 import { Text, TextTheme } from 'shared/ui/Text/Text';
+import { VStack } from 'shared/ui/Stack';
 import cls from './ProfilePage.module.scss';
 import { ProfilePageHeader } from './ProfilePageHeader/ProfilePageHeader';
 
@@ -103,24 +104,26 @@ const ProfilePage = (props: ProfilePageProps) => {
 
   return (
     <Page className={classNames(cls.ProfilePage, {}, [className])}>
-      <ProfilePageHeader />
-      {validateErrors?.length && validateErrors.map((error) => (
-        <Text key={error} theme={TextTheme.ERROR} text={validateErrorTranslates[error]} />
-      ))}
-      <ProfileCard
-        data={formData}
-        isLoading={isLoading}
-        error={error}
-        readonly={readonly}
-        onChangeFirstname={onChangeFirstname}
-        onChangeLastname={onChangeLastname}
-        onChangeAge={onChangeAge}
-        onChangeCity={onChangeCity}
-        onChangeUsername={onChangeUsername}
-        onChangeAvatar={onChangeAvatar}
-        onChangeCurrency={onChangeCurrency}
-        onChangeCountry={onChangeCountry}
-      />
+      <VStack gap="16" max>
+        <ProfilePageHeader />
+        {validateErrors?.length && validateErrors.map((error) => (
+          <Text key={error} theme={TextTheme.ERROR} text={validateErrorTranslates[error]} />
+        ))}
+        <ProfileCard
+          data={formData}
+          isLoading={isLoading}
+          error={error}
+          readonly={readonly}
+          onChangeFirstname={onChangeFirstname}
+          onChangeLastname={onChangeLastname}
+          onChangeAge={onChangeAge}
+          onChangeCity={onChangeCity}
+          onChangeUsername={onChangeUsername}
+          onChangeAvatar={onChangeAvatar}
+          onChangeCurrency={onChangeCurrency}
+          onChangeCountry={onChangeCountry}
+        />
+      </VStack>
     </Page>
   );
 };

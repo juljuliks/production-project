@@ -6,6 +6,7 @@ import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { Button, ButtonTheme } from 'shared/ui/Button/Button';
 import { Input } from 'shared/ui/Input/Input';
 import { ReducersList, useDynamicModuleLoad } from 'shared/lib/hooks/useDynamicModuleLoad';
+import { HStack } from 'shared/ui/Stack';
 import { addCommentFormActions, addCommentFormReducer } from '../../model/slices/addCommentFormSlice';
 import {
   getAddCommentFormError,
@@ -40,7 +41,7 @@ const AddCommentForm = memo((props: AddCommentFormProps) => {
   }, [text, dispatch, onSendComment]);
 
   return (
-    <div className={classNames(cls.AddCommentForm, {}, [className])}>
+    <HStack justify="between" max className={classNames(cls.AddCommentForm, {}, [className])}>
       <Input
         value={text}
         onChange={onCommentTextChange}
@@ -52,7 +53,7 @@ const AddCommentForm = memo((props: AddCommentFormProps) => {
       >
         {t('Отправить')}
       </Button>
-    </div>
+    </HStack>
   );
 });
 
