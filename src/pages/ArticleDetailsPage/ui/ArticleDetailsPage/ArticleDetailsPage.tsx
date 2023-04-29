@@ -12,6 +12,7 @@ import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { AddCommentForm } from 'features/AddCommentForm';
 import { Page } from 'widgets/Page';
 import { ArticleList } from 'entities/Article/ui/ArticleList/ArticleList';
+import { VStack } from 'shared/ui/Stack';
 import {
   getArticleComments,
 } from '../../model/slice/articleDetailCommentSlice';
@@ -65,21 +66,22 @@ const ArticleDetailsPage: FC<ArticleDetailsPageProps> = (props) => {
 
   return (
     <Page className={classNames(cls.articleDetailsPage, {}, [className])}>
-      <ArticleDetailsPageHeader />
-      <ArticleDetails id={id} />
+      <VStack gap="16" max>
+        <ArticleDetailsPageHeader />
+        <ArticleDetails id={id} />
 
-      <Text className={cls.commentsTitle} title={t('Рекомендации')} />
-      <ArticleList
-        className={cls.recommendations}
-        articles={recommendations}
-        isLoading={recommendationsIsLoading}
-        target="_blank"
-      />
+        <Text className={cls.commentsTitle} title={t('Рекомендации')} />
+        <ArticleList
+          className={cls.recommendations}
+          articles={recommendations}
+          isLoading={recommendationsIsLoading}
+          target="_blank"
+        />
 
-      <Text className={cls.commentsTitle} title={t('Комментарии')} />
-      <AddCommentForm onSendComment={onSendComment} />
-
-      <CommentList comments={comments} isLoading={commentsIsLoading} />
+        <Text className={cls.commentsTitle} title={t('Комментарии')} />
+        <AddCommentForm onSendComment={onSendComment} />
+        <CommentList comments={comments} isLoading={commentsIsLoading} />
+      </VStack>
     </Page>
   );
 };
