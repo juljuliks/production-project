@@ -2,7 +2,6 @@ import {
   AnyAction, CombinedState, EnhancedStore, Reducer, ReducersMapObject,
 } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
-import { CounterSchema } from 'entities/Counter';
 import { ProfileSchema } from 'features/EditableProfileCard';
 import { UserSchema } from 'entities/User';
 import { LoginSchema } from 'features/AuthByUsername';
@@ -15,7 +14,6 @@ import { StoreRestorationSchema } from 'widgets/Page';
 import { rtkApi } from 'shared/api/rtkApi';
 
 export interface StateSchema {
-  counter: CounterSchema,
   user: UserSchema,
   scrollRestoration: StoreRestorationSchema
   [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>

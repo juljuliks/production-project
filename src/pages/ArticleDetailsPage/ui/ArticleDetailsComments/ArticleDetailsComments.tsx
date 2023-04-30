@@ -1,4 +1,4 @@
-import { memo, useCallback } from 'react';
+import { Suspense, memo, useCallback } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { VStack } from 'shared/ui/Stack';
 import { AddCommentForm } from 'features/AddCommentForm';
@@ -8,6 +8,7 @@ import { Text } from 'shared/ui/Text/Text';
 import { useAppDispatch } from 'shared/lib/hooks/useAppDispatch';
 import { useInitialEffect } from 'shared/lib/hooks/useInitialEffect';
 import { useSelector } from 'react-redux';
+import { Skeleton } from 'shared/ui/Skeleton/Skeleton';
 import { getArticleCommentsIsLoading } from '../../model/selectors/comments';
 import { getArticleComments } from '../../model/slice/articleDetailCommentSlice';
 import { fetchCommentsByArticleId } from '../../model/services/fetchCommentsByArticleId';
@@ -15,7 +16,7 @@ import { addCommentForArticle } from '../../model/services/addCommentForArticle/
 
 interface ArticleDetailsCommentsProps{
   className?: string;
-  id: string
+  id?: string
 }
 
 const ArticleDetailsComments = memo((props: ArticleDetailsCommentsProps) => {
@@ -36,7 +37,9 @@ const ArticleDetailsComments = memo((props: ArticleDetailsCommentsProps) => {
   return (
     <VStack max gap="16" className={classNames('', {}, [className])}>
       <Text title={t('Комментарии')} />
-      <AddCommentForm onSendComment={onSendComment} />
+      <Suspense fallback={<Skeleton />}>
+        <AddCommentForm onSendComment={onSendComment} />
+      </Suspense>
       <CommentList comments={comments} isLoading={commentsIsLoading} />
     </VStack>
   );

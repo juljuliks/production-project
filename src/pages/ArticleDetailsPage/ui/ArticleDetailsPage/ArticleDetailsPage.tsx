@@ -3,7 +3,6 @@ import { FC, memo } from 'react';
 import { useParams } from 'react-router-dom';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { ReducersList, useDynamicModuleLoad } from 'shared/lib/hooks/useDynamicModuleLoad';
-import { useNsTranslation } from 'shared/lib/hooks/useNsTranslation';
 import { Page } from 'widgets/Page';
 import { VStack } from 'shared/ui/Stack';
 import { ArticleRecommendationsList } from 'features/ArticleRecommendationsList';
@@ -23,16 +22,7 @@ const reducers: ReducersList = {
 const ArticleDetailsPage: FC<ArticleDetailsPageProps> = (props) => {
   useDynamicModuleLoad({ reducers });
   const { className } = props;
-  const { t } = useNsTranslation('article-details');
   const { id } = useParams<{ id: string }>();
-
-  if (!id) {
-    return (
-      <div className={classNames(cls.articleDetailsPage, {}, [className])}>
-        {t('Статья не найдена')}
-      </div>
-    );
-  }
 
   return (
     <Page className={classNames(cls.articleDetailsPage, {}, [className])}>
