@@ -6,6 +6,7 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import dotenv from 'dotenv';
 import CopyPlugin from 'copy-webpack-plugin';
 import CircularDependencyPlugin from 'circular-dependency-plugin';
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import { BuildOptions } from './types/config';
 
 export function buildPlugins({ paths, isDev, project }: BuildOptions): webpack.WebpackPluginInstance[] {
@@ -36,6 +37,15 @@ export function buildPlugins({ paths, isDev, project }: BuildOptions): webpack.W
       patterns: [
         { from: paths.locales, to: paths.buildLocales },
       ],
+    }),
+    new ForkTsCheckerWebpackPlugin({
+      typescript: {
+        diagnosticOptions: {
+          semantic: true,
+          syntactic: true,
+        },
+        mode: 'write-references',
+      },
     }),
   ];
 
