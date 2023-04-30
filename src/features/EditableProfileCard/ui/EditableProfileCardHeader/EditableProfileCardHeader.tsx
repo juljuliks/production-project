@@ -13,7 +13,7 @@ import { getProfileData } from '../../model/selectors/getProfileData/getProfileD
 import { updateProfileData } from '../../model/services/updateProfileData/updateProfileData';
 
 interface EditableProfileCardHeaderProps {
-    className?: string;
+  className?: string;
 }
 
 export const EditableProfileCardHeader = memo((props: EditableProfileCardHeaderProps) => {
@@ -50,6 +50,7 @@ export const EditableProfileCardHeader = memo((props: EditableProfileCardHeaderP
               <Button
                 theme={ButtonTheme.OUTLINE}
                 onClick={onEdit}
+                data-testid="EditableProfileCardHeader.EditButton"
               >
                 {t('Редактировать')}
               </Button>
@@ -59,12 +60,14 @@ export const EditableProfileCardHeader = memo((props: EditableProfileCardHeaderP
                 <Button
                   theme={ButtonTheme.OUTLINE_RED}
                   onClick={onCancelEdit}
+                  data-testid="EditableProfileCardHeader.CancelButton"
                 >
                   {t('Отменить')}
                 </Button>
                 <Button
                   theme={ButtonTheme.OUTLINE}
                   onClick={onSave}
+                  data-testid="EditableProfileCardHeader.SaveButton"
                 >
                   {t('Сохранить')}
                 </Button>
