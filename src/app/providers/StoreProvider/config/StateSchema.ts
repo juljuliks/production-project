@@ -12,11 +12,13 @@ import { AddCommentFormSchema } from 'features/AddCommentForm';
 import { ArticlesPageSchema } from 'pages/ArticlesPage';
 import { ArticleDetailsSchema } from 'entities/Article';
 import { StoreRestorationSchema } from 'widgets/Page';
+import { rtkApi } from 'shared/api/rtkApi';
 
 export interface StateSchema {
   counter: CounterSchema,
   user: UserSchema,
   scrollRestoration: StoreRestorationSchema
+  [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>
 
   // Ассинхронные редюсеры
   loginForm?: LoginSchema
@@ -25,6 +27,7 @@ export interface StateSchema {
   addCommentForm?: AddCommentFormSchema
   articlesPage?: ArticlesPageSchema
   articleDetailsPage?: ArticleDetailsPageSchema
+
 }
 
 export type StateSchemaKey = keyof StateSchema

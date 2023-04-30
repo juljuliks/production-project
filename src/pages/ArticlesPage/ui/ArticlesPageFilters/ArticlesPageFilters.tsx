@@ -11,12 +11,12 @@ import { useNsTranslation } from 'shared/lib/hooks/useNsTranslation';
 import { SortOrder } from 'shared/types';
 import { Card } from 'shared/ui/Card/Card';
 import { Input } from 'shared/ui/Input/Input';
+import { HStack, VStack } from 'shared/ui/Stack';
 import { articlesPageActions } from '../../model/slices/articlesPageSlice';
 import { fetchArticlesList } from '../../model/services/fetchArticlesList/fetchArticlesList';
 import {
   getArticlesPageOrder, getArticlesPageSearch, getArticlesPageSort, getArticlesPageType, getArticlesPageView,
 } from '../../model/selectors/articlesPageSelectors';
-import cls from './ArticlesPageFilters.module.scss';
 
 interface ArticlesPageFiltersProps {
   className?: string;
@@ -67,8 +67,8 @@ export const ArticlesPageFilters = memo((props: ArticlesPageFiltersProps) => {
   }, [dispatch, fetchData]);
 
   return (
-    <div className={classNames(cls.ArticlesPageFilters, {}, [className])}>
-      <div className={cls.sortWrapper}>
+    <VStack max gap="16" className={classNames('', {}, [className])}>
+      <HStack justify="between" max>
         <ArticleSortSelector
           order={order}
           sort={sort}
@@ -79,8 +79,8 @@ export const ArticlesPageFilters = memo((props: ArticlesPageFiltersProps) => {
           view={view}
           onViewClick={onChangeView}
         />
-      </div>
-      <Card className={cls.search}>
+      </HStack>
+      <Card>
         <Input
           onChange={onChangeSearch}
           value={search}
@@ -90,8 +90,7 @@ export const ArticlesPageFilters = memo((props: ArticlesPageFiltersProps) => {
       <ArticleTypeTabs
         value={type}
         onChangeType={onChangeType}
-        className={cls.tabs}
       />
-    </div>
+    </VStack>
   );
 });
