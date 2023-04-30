@@ -1,9 +1,11 @@
-import { Profile, ValidateProfileError } from '../../types/profile';
+import { Profile } from 'entities/Profile';
+import { ValidateProfileError } from '../../types/editableProfileCardSchema';
 
 export const validateProfileData = (profile?: Profile) => {
   if (!profile) {
     return [ValidateProfileError.NO_DATA];
   }
+
   const {
     first, lastname, age, country,
   } = profile;
@@ -14,7 +16,7 @@ export const validateProfileData = (profile?: Profile) => {
     errors.push(ValidateProfileError.INCORRECT_USER_DATA);
   }
 
-  if (!age) {
+  if (!age || !Number.isInteger(age)) {
     errors.push(ValidateProfileError.INCORRECT_AGE);
   }
 

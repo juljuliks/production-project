@@ -6,7 +6,7 @@ import avatar from 'shared/assets/tests/storybook.jpg';
 import { ProfileCard } from './ProfileCard';
 
 export default {
-  title: 'features/ProfileCard',
+  title: 'entities/ProfileCard',
   component: ProfileCard,
   argTypes: {
     backgroundColor: { control: 'color' },
@@ -29,8 +29,8 @@ Primary.args = {
   },
 };
 
-export const WithError = Template.bind({});
-WithError.args = {
+export const withError = Template.bind({});
+withError.args = {
   error: 'true',
 };
 
