@@ -11,9 +11,10 @@ import { Button, ButtonTheme } from 'shared/ui/Button/Button';
 import { AppLink, AppLinkTheme } from 'shared/ui/AppLink/AppLink';
 import { RoutePath } from 'shared/config/routeConfig/routeConfig';
 import { Text, TextTheme } from 'shared/ui/Text/Text';
-import { Dropdown } from 'shared/ui/Dropdown/Dropdown';
-import { Avatar } from 'shared/ui/Avatar/Avatar';
 import { useNavigate } from 'react-router-dom';
+import { HStack } from 'shared/ui/Stack';
+import { NotificationButton } from 'features/NotificationButton';
+import { AvatarDropdown } from 'features/AvatarDropdown';
 import cls from './Navbar.module.scss';
 
 interface NavBarProps {
@@ -24,11 +25,6 @@ export const Navbar = memo(({ className }: NavBarProps) => {
   const { t } = useTranslation();
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const authData = useSelector(getUserAuthData);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const isAdmin = useSelector(isUserAdmin);
-  const isManager = useSelector(isUserManager);
-  const isAdminPanelAvailable = isAdmin || isManager;
 
   const onShowModal = useCallback(() => {
     setIsAuthModalOpen(true);
@@ -37,10 +33,6 @@ export const Navbar = memo(({ className }: NavBarProps) => {
   const onCloseModal = useCallback(() => {
     setIsAuthModalOpen(false);
   }, []);
-
-  const onLogout = useCallback(() => {
-    dispatch(userActions.logout());
-  }, [dispatch]);
 
   if (authData) {
     return (
@@ -57,27 +49,10 @@ export const Navbar = memo(({ className }: NavBarProps) => {
         >
           {t('Создание статьи')}
         </AppLink>
-        <Dropdown
-          direction="bottom left"
-          className={cls.dropdown}
-          items={[
-            ...(
-              isAdminPanelAvailable ? [{
-                content: t('Админка'),
-                onClick: () => navigate(`${RoutePath.admin_panel}`),
-              }]
-                : []),
-            {
-              content: t('Профиль'),
-              onClick: () => navigate(`${RoutePath.profile}/${authData.id}`),
-            },
-            {
-              content: t('Выйти'),
-              onClick: onLogout,
-            },
-          ]}
-          trigger={<Avatar size={30} src={authData.avatar} />}
-        />
+        <HStack gap="16" className={cls.actions}>
+          <NotificationButton />
+          <AvatarDropdown />
+        </HStack>
       </header>
     );
   }
