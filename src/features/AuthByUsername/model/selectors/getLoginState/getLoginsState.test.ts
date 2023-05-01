@@ -1,4 +1,4 @@
-import { StateSchema } from 'app/providers/StoreProvider';
+import { StateSchema } from '@/app/providers/StoreProvider';
 import { initialState } from '../../slice/loginSlice';
 import { getLoginState } from './getLoginsState';
 
