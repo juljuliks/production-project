@@ -3,6 +3,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { ThemeDecorator } from '@/shared/config/storybook/ThemeDecorator';
 import { NotFoundPage } from './NotFoundPage';
 import { Theme } from '@/shared/const/theme';
+import { StoreDecorator } from '@/shared/config/storybook/StoreDecorator';
 
 export default {
   title: 'pages/NotFoundPage',
@@ -16,6 +17,7 @@ const Template: ComponentStory<typeof NotFoundPage> = (args) => <NotFoundPage {.
 
 export const Normal = Template.bind({});
 Normal.args = {};
+Dark.decorators = [StoreDecorator({})];
 
 export const Dark = Template.bind({});
 Dark.args = {};
