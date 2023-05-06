@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNsTranslation } from '@/shared/lib/hooks/useNsTranslation';
-import { Button } from '@/shared/ui/Button/Button';
+import { Button } from '@/shared/ui/Button';
 
 // Компонент для тестирования
 export const BugButton = () => {
