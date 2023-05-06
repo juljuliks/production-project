@@ -19,6 +19,8 @@ import { getProfileValidateErrors } from '../../model/selectors/getProfileValida
 import { fetchProfileData } from '../../model/services/fetchProfileData/fetchProfileData';
 import { profileActions, profileReducer } from '../../model/slice/profileSlice';
 import { EditableProfileCardHeader } from '../EditableProfileCardHeader/EditableProfileCardHeader';
+import { ProfileRating } from '@/features/ProfileRating';
+import { getUserAuthData } from '@/entities/User';
 
 interface EditableProfileCardProps {
     className?: string;
@@ -39,6 +41,8 @@ export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
   const error = useSelector(getProfileError);
   const readonly = useSelector(getProfileReadonly);
   const validateErrors = useSelector(getProfileValidateErrors);
+  const authData = useSelector(getUserAuthData);
+  const canRate = authData?.id !== id;
 
   useDynamicModuleLoad({ reducers });
 
@@ -88,6 +92,10 @@ export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
     dispatch(profileActions.updateProfile({ country }));
   }, [dispatch]);
 
+  if (!id) {
+    return null;
+  }
+
   return (
     <VStack
       gap="8"
@@ -117,6 +125,7 @@ export const EditableProfileCard = memo((props: EditableProfileCardProps) => {
         onChangeCurrency={onChangeCurrency}
         onChangeCountry={onChangeCountry}
       />
+      {canRate && <ProfileRating profileId={id} />}
     </VStack>
   );
 });

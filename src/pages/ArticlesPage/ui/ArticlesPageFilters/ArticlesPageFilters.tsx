@@ -1,9 +1,8 @@
 import { memo, useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import { ArticleSortField, ArticleType, ArticleView } from '@/entities/Article';
-import { ArticleSortSelector } from '@/entities/Article/ui/ArticleSortSelector/ArticleSortSelector';
-import { ArticleTypeTabs } from '@/entities/Article/ui/ArticleTypeTabs/ArticleTypeTabs';
-import { ArticleViewSelector } from '@/entities/Article/ui/ArticleViewSelector/ArticleViewSelector';
+import {
+  ArticleSortField, ArticleType, ArticleView, ArticleSortSelector, ArticleTypeTabs, ArticleViewSelector,
+} from '@/entities/Article';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import { useDebounce } from '@/shared/lib/hooks/useDebounce';

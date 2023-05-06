@@ -19,13 +19,12 @@ export interface StateSchema {
   [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>
 
   // Ассинхронные редюсеры
-  loginForm?: LoginSchema
-  profile?: ProfileSchema
-  articleDetails?: ArticleDetailsSchema
-  addCommentForm?: AddCommentFormSchema
-  articlesPage?: ArticlesPageSchema
-  articleDetailsPage?: ArticleDetailsPageSchema
-
+  loginForm?: LoginSchema;
+  profile?: ProfileSchema;
+  articleDetails?: ArticleDetailsSchema;
+  addCommentForm?: AddCommentFormSchema;
+  articlesPage?: ArticlesPageSchema;
+  articleDetailsPage?: ArticleDetailsPageSchema;
 }
 
 export type StateSchemaKey = keyof StateSchema

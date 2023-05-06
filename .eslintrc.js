@@ -56,7 +56,14 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'error', // Checks effect dependencies
     'no-param-reassign': 'off',
     'no-undef': 'off',
-    'feature-sliced-rules/path-checker': 'error',
+    'feature-sliced-rules/path-checker': ['error', { alias: '@' }],
+    'feature-sliced-rules/public-api-imports': [
+      'error',
+      {
+        alias: '@',
+        testFilesPatterns: ['**/*.test.*', '**/*.stories.*', '**/StoreDecorator.tsx'],
+      },
+    ],
     'react/no-array-index-key': 'warn',
   },
   globals: {

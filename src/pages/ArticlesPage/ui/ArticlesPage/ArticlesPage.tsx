@@ -1,7 +1,6 @@
 /* eslint-disable i18next/no-literal-string */
 import { FC, memo, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { ArticleList } from '@/entities/Article/ui/ArticleList/ArticleList';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import { ReducersList, useDynamicModuleLoad } from '@/shared/lib/hooks/useDynamicModuleLoad';
