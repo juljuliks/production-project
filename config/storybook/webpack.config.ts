@@ -8,13 +8,16 @@ export default ({ config }: { config: webpack.Configuration }) => {
     build: '',
     html: '',
     entry: '',
-    src: path.relative(__dirname, '../../src'),
+    src: path.resolve(__dirname, '..', '..', 'src'),
     locales: '',
     buildLocales: '',
   };
   config.resolve?.modules?.push(paths.src);
   config.resolve?.extensions?.push('.ts', '.tsx');
-  config!.resolve!.alias = { '@': path.resolve(__dirname, '..', '..', 'src') };
+  config!.resolve!.alias = {
+    ...config.resolve?.alias,
+    '@': paths.src,
+  };
 
   // @ts-ignore
   // eslint-disable-next-line no-param-reassign
@@ -35,7 +38,7 @@ export default ({ config }: { config: webpack.Configuration }) => {
 
   config.plugins?.push(new DefinePlugin({
     __IS_DEV__: JSON.stringify(true),
-    __API__: 'https://testapi.ru',
+    __API__: JSON.stringify('https://testapi.ru'),
     __PROJECT__: JSON.stringify('storybook'),
   }));
 
