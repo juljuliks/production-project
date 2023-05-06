@@ -1,11 +1,11 @@
 import { Story } from '@storybook/react';
 import { StateSchema, StoreProvider } from '@/app/providers/StoreProvider';
-import { loginReducer } from '@/features/AuthByUsername';
+import { loginReducer } from '@/features/AuthByUsername/testing';
 import { profileReducer } from '@/features/EditableProfileCard/testing';
 import { ReducersList } from '@/shared/lib/hooks/useDynamicModuleLoad';
 import { articleDetailsReducer } from '@/entities/Article/testing';
 import { addCommentFormReducer } from '@/features/AddCommentForm/testing';
-// eslint-disable-next-line feature-sliced-rules/public-api-imports
+// eslint-disable-next-line feature-sliced-rules/layer-imports, feature-sliced-rules/public-api-imports
 import { articleDetailsPageReducer } from '@/pages/ArticleDetailsPage/model/slice';
 
 const defaultAsyncReducers: ReducersList = {

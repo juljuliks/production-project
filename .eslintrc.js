@@ -64,6 +64,13 @@ module.exports = {
         testFilesPatterns: ['**/*.test.*', '**/*.stories.*', '**/StoreDecorator.tsx'],
       },
     ],
+    'feature-sliced-rules/layer-imports': [
+      'error',
+      {
+        alias: '@',
+        ignoreImportPatterns: ['**/StoreProvider', '**/testing'],
+      },
+    ],
     'react/no-array-index-key': 'warn',
   },
   globals: {
