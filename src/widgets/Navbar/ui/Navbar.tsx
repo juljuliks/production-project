@@ -1,10 +1,9 @@
 /* eslint-disable i18next/no-literal-string */
 import React, { memo, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import {
-  getUserAuthData, isUserAdmin, isUserManager, userActions,
+  getUserAuthData,
 } from '@/entities/User';
 import { LoginModal } from '@/features/AuthByUsername';
 import { classNames } from '@/shared/lib/classNames/classNames';
