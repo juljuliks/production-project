@@ -4,10 +4,10 @@ import { useSelector } from 'react-redux';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { useNsTranslation } from '@/shared/lib/hooks/useNsTranslation';
 import { Button, ButtonTheme } from '@/shared/ui/Button';
-import { RoutePath } from '@/shared/const/router';
 import { getArticleDetailsData } from '@/entities/Article';
 import { HStack } from '@/shared/ui/Stack';
 import { getCanEditArticle } from '../../model/selectors/article';
+import { getRouteArticleEdit } from '@/shared/const/router';
 
 interface ArticleDetailsPageHeaderProps {
   className?: string;
@@ -25,7 +25,9 @@ export const ArticleDetailsPageHeader = memo((props: ArticleDetailsPageHeaderPro
   }, [navigate]);
 
   const onEditArticle = useCallback(() => {
-    navigate(`${RoutePath.article_details}/${article?.id}/edit`);
+    if (article?.id) {
+      navigate(getRouteArticleEdit(article.id));
+    }
   }, [article?.id, navigate]);
 
   return (

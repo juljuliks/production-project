@@ -5,8 +5,7 @@ import { profileReducer } from '@/features/EditableProfileCard/testing';
 import { ReducersList } from '@/shared/lib/hooks/useDynamicModuleLoad';
 import { articleDetailsReducer } from '@/entities/Article/testing';
 import { addCommentFormReducer } from '@/features/AddCommentForm/testing';
-// eslint-disable-next-line feature-sliced-rules/layer-imports, feature-sliced-rules/public-api-imports
-import { articleDetailsPageReducer } from '@/pages/ArticleDetailsPage/model/slice';
+import { articleDetailsPageReducer } from '@/pages/ArticleDetailsPage/testing';
 
 const defaultAsyncReducers: ReducersList = {
   loginForm: loginReducer,
