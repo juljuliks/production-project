@@ -4,10 +4,10 @@ import { useSelector } from 'react-redux';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { useNsTranslation } from '@/shared/lib/hooks/useNsTranslation';
 import { Button, ButtonTheme } from '@/shared/ui/Button';
-import { getArticleDetailsData } from '@/entities/Article';
 import { HStack } from '@/shared/ui/Stack';
 import { getCanEditArticle } from '../../model/selectors/article';
 import { getRouteArticleEdit } from '@/shared/const/router';
+import { useArticleDetailsData } from '@/entities/Article';
 
 interface ArticleDetailsPageHeaderProps {
   className?: string;
@@ -18,7 +18,7 @@ export const ArticleDetailsPageHeader = memo((props: ArticleDetailsPageHeaderPro
   const { t } = useNsTranslation('article-datails');
   const navigate = useNavigate();
   const canEdit = useSelector(getCanEditArticle);
-  const article = useSelector(getArticleDetailsData);
+  const article = useArticleDetailsData();
 
   const onBackToList = useCallback(() => {
     navigate(-1);

@@ -1,7 +1,6 @@
 /* eslint-disable i18next/no-literal-string */
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch';
 import { ReducersList, useDynamicModuleLoad } from '@/shared/lib/hooks/useDynamicModuleLoad';
@@ -18,9 +17,9 @@ import { fetchArticleById } from '../../model/services/fetchArticleById';
 import { ArticleCodeBlockComponent } from '../ArticleCodeBlockComponent/ArticleCodeBlockComponent';
 import { ArticleBlock } from '../../model/types/article';
 import {
-  getArticleDetailsData,
-  getArticleDetailsError,
-  getArticleDetailsIsLoading,
+  useArtcileDetailsIsLoading,
+  useArticleDetailsData,
+  useArticleDetailsError,
 } from '../../model/selectors/articleDetails';
 import { articleDetailsReducer } from '../../model/slice/articleDetailsSlice';
 import cls from './ArticleDetails.module.scss';
@@ -71,9 +70,9 @@ export const ArticleDetails = memo((props: ArticleDetailsProps) => {
   const { className, id } = props;
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const isLoading = useSelector(getArticleDetailsIsLoading);
-  const article = useSelector(getArticleDetailsData);
-  const error = useSelector(getArticleDetailsError);
+  const isLoading = useArtcileDetailsIsLoading();
+  const article = useArticleDetailsData();
+  const error = useArticleDetailsError();
   useDynamicModuleLoad({ reducers });
 
   useInitialEffect(() => {

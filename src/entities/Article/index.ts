@@ -1,6 +1,6 @@
 export { ArticleList } from './ui/ArticleList/ArticleList';
 
-export { getArticleDetailsData } from './model/selectors/articleDetails';
+export { getArticleDetailsData, useArticleDetailsData } from './model/selectors/articleDetails';
 
 export type { ArticleDetailsSchema } from './model/types/articlesDetailsSchema';
 
