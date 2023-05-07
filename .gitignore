@@ -6,4 +6,4 @@ node_modules
 .loki/report.json
 /dist
 ./extractedTranslations
-/reports
+/reports/unit
