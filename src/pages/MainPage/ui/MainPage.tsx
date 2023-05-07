@@ -7,7 +7,7 @@ const MainPage: FC = () => {
   const { t } = useTranslation();
 
   return (
-    <Page>
+    <Page data-testid="MainPage">
       {/* <BugButton /> */}
       {t('Главная страница')}
     </Page>

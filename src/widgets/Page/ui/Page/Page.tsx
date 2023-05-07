@@ -12,8 +12,9 @@ import { useThrottle } from '@/shared/lib/hooks/useThrottle';
 import { getScrollPositioByPath } from '../../model/selectors/getScrollPosition';
 import { scrollRestorationActions } from '../../model/slices/scrollRestorationSlice';
 import cls from './Page.module.scss';
+import { TestProps } from '@/shared/types/tests';
 
-interface PageProps {
+interface PageProps extends TestProps {
   className?: string;
   children: ReactNode;
   onScrollEnd?: () => void;
@@ -46,6 +47,8 @@ export const Page = (props: PageProps) => {
       ref={wrapperRef}
       className={classNames(cls.Page, {}, [className])}
       onScroll={handlePageScroll}
+      // eslint-disable-next-line react/destructuring-assignment
+      data-testid={props['data-testid'] ?? 'Page'}
     >
       {children}
       {onScrollEnd && <div className={cls.trigger} ref={triggerRef} />}
