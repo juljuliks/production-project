@@ -21,7 +21,7 @@ interface PageProps extends TestProps {
 }
 
 export const Page = (props: PageProps) => {
-  const { className, children, onScrollEnd } = props;
+  const { className, children, onScrollEnd }=props;
   const wrapperRef = useRef() as MutableRefObject<HTMLDivElement>;
   const triggerRef = useRef() as MutableRefObject<HTMLDivElement>;
   const dispatch = useAppDispatch();

@@ -28,6 +28,9 @@
     "generate:slice": "node ./scripts/createSlice/index.js",
     "postinstall": "ts-node ./scripts/clearCache.ts"
   },
+  "lint-staged": {
+    "**/*.{ts,tsx}": "eslint"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -143,8 +146,5 @@
         "preset": "iPhone 7"
       }
     }
-  },
-    "lint-staged": {
-      "**/*.{ts,tsx}": "eslint"
-    }
+  }
 }

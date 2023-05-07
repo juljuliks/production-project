@@ -12,7 +12,7 @@ interface AppImageProps extends ImgHTMLAttributes<HTMLImageElement> {
 export const AppImage = memo((props: AppImageProps) => {
   const {
     className, src, alt = '', fallback, errorFallback, ...otherProps
-  }= props;
+  } = props;
   const [isLoading, setIsLoading] = useState(true);
   const [hasError, setHasError] = useState(true);
 
