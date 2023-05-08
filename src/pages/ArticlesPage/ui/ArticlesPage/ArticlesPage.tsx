@@ -40,6 +40,7 @@ const ArticlesPage: FC<ArticlesPageProps> = (props) => {
     <Page
       className={classNames(cls.ArticlesPage, {}, [className])}
       onScrollEnd={onLoadNextPart}
+      data-testid="ArticlesPage"
     >
       <VStack max gap="32">
         <ArticlesPageFilters />
