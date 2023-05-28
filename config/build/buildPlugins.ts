@@ -3,7 +3,6 @@ import webpack from 'webpack';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
-import dotenv from 'dotenv';
 import CopyPlugin from 'copy-webpack-plugin';
 import CircularDependencyPlugin from 'circular-dependency-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
@@ -13,14 +12,6 @@ export function buildPlugins({
   paths, isDev, apiUrl, project,
 }: BuildOptions): webpack.WebpackPluginInstance[] {
   const isProd = !isDev;
-  // @ts-ignore
-  const env = dotenv.config().parsed!;
-
-  const envKeys = Object.keys(env).reduce((prev: Record<string, string>, next) => {
-    const key = `process.env.${next}`;
-    prev[key] = JSON.stringify(env[next]);
-    return prev;
-  }, {});
 
   const plugins = [
     new HtmlWebpackPlugin({
@@ -31,7 +22,6 @@ export function buildPlugins({
       __IS_DEV__: JSON.stringify(isDev),
       __API__: JSON.stringify(apiUrl),
       __PROJECT__: JSON.stringify(project),
-      ...envKeys,
     }),
     new ForkTsCheckerWebpackPlugin({
       typescript: {

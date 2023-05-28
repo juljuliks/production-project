@@ -11,6 +11,9 @@ import cls from './ArticleDetailsPage.module.scss';
 import { ArticleDetailsPageHeader } from '../ArticleDetailsPageHeader/ArticleDetailsPageHeader';
 import ArticleDetailsComments from '../ArticleDetailsComments/ArticleDetailsComments';
 import { ArticleRating } from '@/features/ArticleRating';
+import { ToggleFeatures } from '@/shared/lib/features';
+import { Card } from '@/shared/ui/Card';
+import { useNsTranslation } from '@/shared/lib/hooks/useNsTranslation';
 
 interface ArticleDetailsPageProps {
   className?: string;
@@ -24,6 +27,7 @@ const ArticleDetailsPage: FC<ArticleDetailsPageProps> = (props) => {
   useDynamicModuleLoad({ reducers });
   const { className } = props;
   const { id } = useParams<{ id: string }>();
+  const { t } = useNsTranslation('article-details');
 
   if (!id) {
     return null;
@@ -34,7 +38,11 @@ const ArticleDetailsPage: FC<ArticleDetailsPageProps> = (props) => {
       <VStack gap="16" max>
         <ArticleDetailsPageHeader />
         <ArticleDetails id={id} />
-        <ArticleRating articleId={id} />
+        <ToggleFeatures
+          feature="isArticleRatingEnabled"
+          on={<ArticleRating articleId={id} />}
+          off={<Card>{t('Оценка статей скоро появится!')}</Card>}
+        />
         <ArticleRecommendationsList />
         <ArticleDetailsComments id={id} />
       </VStack>

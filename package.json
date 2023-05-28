@@ -27,7 +27,8 @@
     "storybook:build": "build-storybook -c ./config/storybook",
     "prepare": "npx husky install",
     "generate:slice": "node ./scripts/createSlice/index.js",
-    "postinstall": "ts-node ./scripts/clearCache.ts"
+    "postinstall": "ts-node ./scripts/clearCache.ts",
+    "remove-feature": "ts-node ./scripts/remove-feature.ts"
   },
   "lint-staged": {
     "**/*.{ts,tsx}": "eslint"
@@ -123,7 +124,6 @@
     "@use-gesture/react": "^10.2.19",
     "axios": "^0.26.1",
     "concurrently": "^7.0.0",
-    "dotenv": "^16.0.3",
     "i18next": "^21.9.0",
     "i18next-browser-languagedetector": "^6.1.3",
     "i18next-http-backend": "^1.3.2",
